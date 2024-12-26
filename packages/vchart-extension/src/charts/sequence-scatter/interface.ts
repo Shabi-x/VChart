@@ -3,24 +3,50 @@ import { Datum } from '@visactor/vchart/src/typings/common';
 import { ITextGraphicAttribute } from '@visactor/vrender-core';
 
 type IterationData = Datum[];
-type ISequenceScatterData = {
+type IterationNodesData = Datum[];
+type IterationEdgesData = Datum[];
+
+// maybe like this:
+// const data: ISequenceScatterData = {
+//   "1": {
+//     nodes: [
+//       {
+//         x: 0.48,
+//         y: -6.84,
+//         id: 'node1',
+//       },
+//       {
+//         x: 0.21,
+//         y: -6.22,
+//         id: 'node2',
+//       }
+//     ],
+//     edges: [
+//       {
+//         source: 'node1',
+//         target: 'node2',
+//       }
+//     ]
+//   }
+// };
+export type ISequenceScatterData = {
   /**
    * key: 迭代信息
    * value: 每个迭代的数据
    */
-  [Iteration: string]: IterationData;
+  // [Iteration: string]: IterationData;
 
   // TODO: 支持边的绘制
-  // [Iteration: string]: {
-  //   /**
-  //    * 节点数据
-  //    */
-  //   nodes: IterationNodesData;
-  //   /**
-  //    * 边数据
-  //    */
-  //   edges: IterationEdgesData;
-  // };
+  [Iteration: string]: {
+    /**
+     * 节点数据
+     */
+    nodes: IterationNodesData;
+    /**
+     * 边数据
+     */
+    edges: IterationEdgesData;
+  };
 };
 
 export interface ISequenceScatterSpec {

@@ -3,5 +3,6 @@
  */
 
 // import VChart from '../../../src';
-import './index.page.local';
+// import './index.page.local';
+import './test-page/sequence-scatter';
 // window['VChart'] = VChart;

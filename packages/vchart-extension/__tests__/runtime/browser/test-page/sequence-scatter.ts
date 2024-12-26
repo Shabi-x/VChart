@@ -1,11 +1,55 @@
 import { registerSequenceScatter } from '../../../../src';
 import { VChart } from '@visactor/vchart';
 import trainingData1 from '../data/sequence-scatter/Training_process1/data.json';
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import trainingData2 from '../data/sequence-scatter/Training_process2/data.json';
+import { ISequenceScatterData } from '../../../../src/charts/sequence-scatter/interface';
+import { debugConvertDataWithEdges } from './sequence-scatter-transformer.test';
 const origianlData = trainingData1;
 // const origianlData = trainingData2;
 const chartData = {};
+debugConvertDataWithEdges();
+// /**
+//  *
+//  * @param originalData
+//  * @returns chartDataWithEdges
+//  */
+// const convertDataWithEdges = originalData => {
+//   const chartData: ISequenceScatterData = {};
+
+//   Object.keys(originalData).forEach(inter => {
+//     const nodes = originalData[inter].projection.map((pos, index) => ({
+//       x: pos[0],
+//       y: pos[1],
+//       id: `node_${inter}_${index}`
+//     }));
+
+//     // 根据 intra_similarity 生成边
+//     const edges =
+//       originalData[inter].intra_similarity
+//         ?.map(similarityGroup => {
+//           const edgesInGroup = [];
+//           for (let i = 0; i < similarityGroup.length - 1; i++) {
+//             edgesInGroup.push({
+//               source: nodes[similarityGroup[i]].id,
+//               target: nodes[similarityGroup[i + 1]].id
+//             });
+//           }
+//           return edgesInGroup;
+//         })
+//         .flat() || [];
+
+//     chartData[inter] = {
+//       nodes: nodes,
+//       edges: edges
+//     };
+//   });
+
+//   return chartData;
+// };
+
+// const chartDataWithEdges = convertDataWithEdges(origianlData);
+// console.log(chartDataWithEdges);
+
 Object.keys(origianlData).forEach(inter => {
   chartData[inter] = [];
   origianlData[inter].projection.forEach(pos => {
@@ -15,6 +59,7 @@ Object.keys(origianlData).forEach(inter => {
     });
   });
 });
+
 const spec = {
   type: 'sequenceScatter',
   data: chartData,
